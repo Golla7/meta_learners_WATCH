@@ -20,18 +20,17 @@ stage-1 estimator** produces cross-fitted nuisances — 5-fold cross-fitting
 stratified on the outcome, `SuperLearner(glmnet + cforest)` outcome models,
 `SuperLearner(glmnet)` propensity (estimated even in an RCT) — and **every
 learner consumes those same nuisances** for its second stage. Methods
-therefore differ *only* in the stage-2 CATE regression.
+therefore differ in the their Phsedo outcome aas well as stage-2 CATE regression.
 
 The single exception is the pair of faithful Gao & Hastie (2022) replicas
-("DINA Gao k2"), because their Algorithm 1 couples the nuisance split to the
-causal split; they run a self-contained 2-fold stage 1 with the *same*
-SuperLearner library.
+("DINA Gao k2"),they run a self-contained 2-fold (each for stage 1 and one for stage 2 then intechange) with the *same*
+SuperLearner library for .
 
 ## Methods compared
 
 | Method | Stage-2 idea | Reference |
 |---|---|---|
-| DR-learner (2-Model 2SL) — *reference* | Per-fold SuperLearner regression of the AIPW pseudo-outcome, averaged over folds | Sechidis et al. (2025) |
+| DR-learner (2-Model 2SL) — *reference* | Per-fold SuperLearner regression(train) of the AIPW pseudo-outcome, estimate ITE and averaged over all data; over folds | Sechidis et al. (2025) |
 | DR-learner (Kennedy) | Cross-fit SuperLearner regression of the AIPW pseudo-outcome | Kennedy (2023) |
 | DINA Original | Single full-sample LASSO on the residualized interaction design (kept as the documented sample-splitting contrast) | Gao & Hastie (2022) |
 | DINA Cross-Fit | Leakage-free DML1: per-fold LASSO, coefficients averaged over the K shared folds | Gao & Hastie (2022) |
@@ -75,8 +74,8 @@ assignment, and a continuous outcome with pre-calibrated effect sizes.
 β ∈ {0, 1, 2} scales the heterogeneity: **β = 0** is the homogeneous null
 (type-I error), **β = 1** is calibrated to ~80% interaction-test power,
 **β = 2** is strong heterogeneity. Ground truth for Objective 2 is *derived
-from the DGP itself* in `R/scenario_meta.R`, so the analysis can never drift
-out of sync with the simulation.
+from the DGP itself* in `R/scenario_meta.R`, 
+<!--so the analysis can never drift out of sync with the simulation. -->
 
 ## Sample results
 
