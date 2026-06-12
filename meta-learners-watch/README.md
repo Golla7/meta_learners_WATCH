@@ -74,7 +74,7 @@ assignment, and a continuous outcome with pre-calibrated effect sizes.
 β ∈ {0, 1, 2} scales the heterogeneity: **β = 0** is the homogeneous null
 (type-I error), **β = 1** is calibrated to ~80% interaction-test power,
 **β = 2** is strong heterogeneity. Ground truth for Objective 2 is *derived
-from the DGP itself* in `R/scenario_meta.R`, 
+from the DGP itself* in `R/scenario_meta.R`.
 <!--so the analysis can never drift out of sync with the simulation. -->
 
 ## Sample results
